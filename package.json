@@ -1,0 +1,12 @@
+{
+  "name": "azure-table-logger",
+  "version": "1.0.0",
+  "description": "A logger using pino or winston that appending to Azure Data Table automatically",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
