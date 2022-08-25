@@ -5,7 +5,7 @@ process.env.NODE_ENV === 'production'
   : dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 
-import { createLogger } from './pino'
+import { createLogger } from './'
 
 (async () => {
   const logger = await createLogger(__filename);
@@ -18,8 +18,6 @@ import { createLogger } from './pino'
     logger.error(reason);
   });
 
-  logger.debug('test');
   logger.info('info message');
   logger.error(new Error('test error'));
-
 })();
