@@ -1,3 +1,18 @@
+# azure-table-logger
+[![npm version](https://img.shields.io/npm/v/azure-table-logger)](https://www.npmjs.com/package/azure-table-logger)
+
+## Install
+
+```
+npm install azure-table-logger
+```
+
+or use yarn
+
+```
+yarn add azure-table-logger
+```
+
 ## Usage
 
 ```js

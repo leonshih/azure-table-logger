@@ -1,6 +1,6 @@
 {
   "name": "azure-table-logger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A logger using pino or winston that appending to Azure Data Table automatically",
   "main": "./build/lib/index.js",
   "types": "./build/lib/index.d.ts",
