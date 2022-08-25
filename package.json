@@ -1,14 +1,20 @@
 {
   "name": "azure-table-logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A logger using pino or winston that appending to Azure Data Table automatically",
-  "main": "index.js",
+  "main": "./build/lib/index.js",
+  "types": "./build/lib/index.d.ts",
   "scripts": {
     "start:local": "NODE_ENV=local nodemon -x ts-node -r ./lib/app.ts",
+    "prepublish": "tsc",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leonshih/azure-table-logger"
+  },
+  "keywords": ["azure", "pino", "winston", "logger"],
+  "author": "Leon Shih",
   "license": "ISC",
   "dependencies": {
     "@azure/data-tables": "^13.1.2",
