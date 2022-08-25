@@ -1,7 +1,7 @@
 ## Usage
 
 ```js
-import { createLogger } from './lib/pino'
+import { createLogger } from 'azure-table-logger';
 
 const logger = await createLogger(__filename);
 
@@ -26,6 +26,7 @@ It will present:
 ## .env
 
 ```
+LOGGER = pino
 LOG_LEVEL = info
 LOG_TO_AZURE_TABLE = true
 AZURE_STORAGE_ACCOUNT = YOUR_AZURE_STORAGE_ACCOUNT
@@ -33,5 +34,5 @@ AZURE_STORAGE_ACCOUNT_KEY = YOUR_AZURE_STORAGE_ACCOUNT_KEY
 ```
 - LOG_LEVEL
     - pino levels: trace | debug | info | warn | error | fatal | silent
-    - winston levels: 
+    - winston levels: error | warn | info | http | verbose | debug | silly
 - LOG_TO_AZURE_TABLE: true | false
