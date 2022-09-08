@@ -4,7 +4,7 @@ import path from 'path';
 import { createWinstonTransport as createAzureTransport } from './azureTable';
 
 /** create winston logger */
-export async function createLogger(fileName: string) {
+export function createLogger(fileName: string) {
   const _fileName = path.basename(fileName);
 
   const { createLogger, format } = winston;
@@ -64,7 +64,7 @@ export async function createLogger(fileName: string) {
   }
 
   // add Azure data table transport
-  const azureWinstonTransport = await createAzureTransport({
+  const azureWinstonTransport = createAzureTransport({
     format: combine(label({ label: _fileName }), timestamp(), customPrintf),
   });
 

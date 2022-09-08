@@ -26,9 +26,7 @@ const credential = new AzureNamedKeyCredential(
   azureStorageAccountKey
 );
 
-export async function createPinoStream() {
-  await createTable();
-
+export function createPinoStream() {
   const parseJsonStream = split2((str: string) => {
     const result = fastJsonParse(str);
     if (result.err) return null;
@@ -63,9 +61,7 @@ export async function createPinoStream() {
  * @param options winston logger option
  * @returns
  */
-export async function createWinstonTransport(options: object) {
-  await createTable();
-
+export function createWinstonTransport(options: object) {
   const transport = new AzureWinstonTransport(
     options,
     azureTableUrl,
@@ -124,7 +120,7 @@ class AzureWinstonTransport extends Transport {
 }
 
 /** create Azure data table */
-async function createTable() {
+export async function createTable() {
   const serviceClient = new TableServiceClient(azureTableUrl, credential);
 
   await serviceClient.createTable(tableName);

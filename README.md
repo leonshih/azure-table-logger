@@ -16,9 +16,12 @@ yarn add azure-table-logger
 ## Usage
 
 ```js
-import { createLogger } from 'azure-table-logger';
+import { createAzureDataTable, createLogger } from 'azure-table-logger';
 
-const logger = await createLogger(__filename);
+if(process.env.LOG_TO_AZURE_TABLE === 'true')
+	await createAzureDataTable();
+
+const logger = createLogger(__filename);
 
 logger.info('info message');
 logger.error(new Error('test error'));
@@ -47,6 +50,9 @@ LOG_TO_AZURE_TABLE = true
 AZURE_STORAGE_ACCOUNT = YOUR_AZURE_STORAGE_ACCOUNT
 AZURE_STORAGE_ACCOUNT_KEY = YOUR_AZURE_STORAGE_ACCOUNT_KEY
 ```
+- LOGGER
+    - pino (recommended)
+    - winston
 - LOG_LEVEL
     - pino levels: trace | debug | info | warn | error | fatal | silent
     - winston levels: error | warn | info | http | verbose | debug | silly

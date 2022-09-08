@@ -7,13 +7,13 @@ import { createPinoStream } from './azureTable';
  * @param fileName (e.g. __filename or 'app.js')
  * @description log level: trace debug info warn error fatal silent
  * @example
- const logger = await createLogger(__filename);
+ const logger = createLogger(__filename);
   
  logger.info('info message');
  logger.error(new Error('test error'));
  * @returns 
  */
-export async function createLogger(fileName: string) {
+export function createLogger(fileName: string) {
   //  const logger = pinoms([{ name, level: process.env.LOG_LEVEL || 'info' }]);
   const name = path.basename(fileName);
 
@@ -34,7 +34,7 @@ export async function createLogger(fileName: string) {
       : [];
 
   if (process.env.LOG_TO_AZURE_TABLE) {
-    const azurePinoStream = await createPinoStream();
+    const azurePinoStream = createPinoStream();
     streams.push(azurePinoStream);
   }
 
