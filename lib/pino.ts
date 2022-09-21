@@ -33,7 +33,7 @@ export function createLogger(fileName: string) {
         ]
       : [];
 
-  if (process.env.LOG_TO_AZURE_TABLE) {
+  if (process.env.LOG_TO_AZURE_TABLE === 'true') {
     const azurePinoStream = createPinoStream();
     streams.push(azurePinoStream);
   }

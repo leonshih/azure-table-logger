@@ -1,7 +1,7 @@
 import Transport from 'winston-transport';
 import pino from 'pino';
 import os from 'os';
-import _ from 'lodash'
+import _ from 'lodash';
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const split2 = require('split2');
@@ -21,12 +21,17 @@ const tableName = `${_.camelCase(process.env.npm_package_name)}Log`;
 const azureStorageAccount = process.env.AZURE_STORAGE_ACCOUNT ?? '';
 const azureStorageAccountKey = process.env.AZURE_STORAGE_ACCOUNT_KEY ?? '';
 const azureTableUrl = `https://${azureStorageAccount}.table.core.windows.net`;
-const credential = new AzureNamedKeyCredential(
-  azureStorageAccount,
-  azureStorageAccountKey
-);
 
 export function createPinoStream() {
+  if (!azureStorageAccount || !azureStorageAccountKey) {
+    throw new Error('Azure storage account or key is not set');
+  }
+
+  const credential = new AzureNamedKeyCredential(
+    azureStorageAccount,
+    azureStorageAccountKey
+  );
+
   const parseJsonStream = split2((str: string) => {
     const result = fastJsonParse(str);
     if (result.err) return null;
@@ -62,6 +67,15 @@ export function createPinoStream() {
  * @returns
  */
 export function createWinstonTransport(options: object) {
+  if (!azureStorageAccount || !azureStorageAccountKey) {
+    throw new Error('Azure storage account or key is not set');
+  }
+
+  const credential = new AzureNamedKeyCredential(
+    azureStorageAccount,
+    azureStorageAccountKey
+  );
+
   const transport = new AzureWinstonTransport(
     options,
     azureTableUrl,
@@ -121,6 +135,15 @@ class AzureWinstonTransport extends Transport {
 
 /** create Azure data table */
 export async function createTable() {
+  if (!azureStorageAccount || !azureStorageAccountKey) {
+    throw new Error('Azure storage account or key is not set');
+  }
+
+  const credential = new AzureNamedKeyCredential(
+    azureStorageAccount,
+    azureStorageAccountKey
+  );
+
   const serviceClient = new TableServiceClient(azureTableUrl, credential);
 
   await serviceClient.createTable(tableName);

@@ -1,9 +1,10 @@
 import { EventEmitter } from 'stream';
-import { createLogger } from '../lib/pino'
+import { createLogger } from '../lib/pino';
 
 describe('pino logger', () => {
   it('should create a pino logger', () => {
     const logger = createLogger(__filename);
+    logger.info('test');
 
     expect(logger).toBeDefined();
     expect(typeof logger).toBe('object');
