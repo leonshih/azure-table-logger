@@ -64,11 +64,13 @@ export function createLogger(fileName: string) {
   }
 
   // add Azure data table transport
-  const azureWinstonTransport = createAzureTransport({
-    format: combine(label({ label: _fileName }), timestamp(), customPrintf),
-  });
+  if (process.env.LOG_TO_AZURE_TABLE === 'true') {
+    const azureWinstonTransport = createAzureTransport({
+      format: combine(label({ label: _fileName }), timestamp(), customPrintf),
+    });
 
-  logger.add(azureWinstonTransport);
+    logger.add(azureWinstonTransport);
+  }
 
   return logger;
 }
